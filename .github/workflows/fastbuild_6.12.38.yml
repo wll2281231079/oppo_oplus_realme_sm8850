@@ -4,7 +4,7 @@ env:
   TZ: Asia/Shanghai
   ANDROID_VERSION: 'android16'
   KERNEL_VERSION: '6.12'
-  KERNEL_NAME: 'android16-5-ga8f88ad96df3-ab13929693-4k'
+  KERNEL_NAME: 'android16-5-g8c67d4274c0a-ab14275539-4k'
 
 on:
   workflow_dispatch:
@@ -871,7 +871,7 @@ jobs:
             ### 📱 欧加真 ${{ env.KSU_TYPENAME }} sm8850 通用内核 | 构建信息
             - 内核版本号: ${{ env.FULL_VERSION }}
             - 编译时间: ${{ env.TIME_FORM }}
-            - 机型：欧加真骁龙8Elite通用 6.12.38 内核（基于一加Ace6t 6.12.38 版官方源码）
+            - 机型：欧加真骁龙8E Gen5通用 6.12.38 内核（基于一加Ace6t 6.12.38 版官方源码）
             - KSU分支：${{ env.KSU_TYPENAME }}
             - susfs支持：${{ github.event.inputs.susfs_enable }}
             - KPM支持 ：${{ github.event.inputs.kpm_enable }}
