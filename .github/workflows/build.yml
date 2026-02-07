@@ -1,0 +1,37 @@
+name: SM8850 Kernel Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install deps
+      run: |
+        sudo apt update
+        sudo apt install -y clang lld llvm build-essential bc bison flex \
+          libssl-dev libelf-dev device-tree-compiler ccache
+
+    - name: Setup Rust
+      run: |
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Build kernel
+      run: |
+        export ARCH=arm64
+        export LLVM=1
+        mkdir out
+        make O=out defconfig
+        make -j$(nproc) O=out
+
+    - name: Upload result
+      uses: actions/upload-artifact@v3
+      with:
+        name: kernel-out
+        path: out/arch/arm64/boot/
